@@ -39,6 +39,7 @@ console.log(start);
 const init = () => {
   numArr.map((el) => printToScreen(el));
   //   console.log("looop");
+  dialog.close();
 };
 
 function sort() {
@@ -50,10 +51,13 @@ function sort() {
     main.innerHTML = "";
     console.log(input.value);
     console.log("wooo");
+
+    // TODO: change the input value to no longer be selectable on the first iteration. create the size based on the screen size using vh and vw values.
     generateNumbers(input.value);
-    // console.log(numArr);
     randomizeArray(numArr);
-    // console.log(numArr);
     init();
   }
 }
+
+const dialog = document.querySelector("dialog");
+dialog.showModal();
