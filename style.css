@@ -80,6 +80,12 @@ h3 {
   font-size: 1rem;
 }
 
+p {
+  font-size: 2rem;
+  color: inherit;
+  text-shadow: inherit;
+}
+
 @media (max-width: 500px) {
   h1 {
     font-size: 1.5rem;
@@ -91,6 +97,10 @@ h3 {
 
   h3 {
     font-size: 0.75rem;
+  }
+
+  p {
+    font-size: 1rem;
   }
 }
 
@@ -166,12 +176,6 @@ main {
   /* color: #fc199a;
   box-shadow: 0 0 2px #100c0f, 0 0 3px #9963ff88, 0 0 5px #9963ff88, 0 0 10px #9963ff88;
   text-shadow: 0 0 2px #100c0f, 0 0 3px #9963ff88, 0 0 5px #9963ff88, 0 0 10px #9963ff88; */
-}
-
-p {
-  font-size: 1.5rem;
-  color: inherit;
-  text-shadow: inherit;
 }
 
 /* .box::after {
