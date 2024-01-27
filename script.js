@@ -1,6 +1,7 @@
 const main = document.querySelector("#main");
-const start = document.querySelector(".button");
-start.addEventListener("click", sort);
+const randomButton = document.querySelector("#random");
+const selectionButton = document.querySelector("#selection");
+randomButton.addEventListener("click", refresh);
 
 let numArr = [];
 
@@ -55,18 +56,69 @@ const printToScreen = (n) => {
   main.appendChild(newElement);
 };
 
-const init = () => {
-  numArr.map((el) => printToScreen(el));
-  dialog.close();
-};
-
-function sort() {
-  main.innerHTML = "";
-
+function refresh() {
   generateNumbers(64);
   randomizeArray(numArr);
-  init();
+
+  main.innerHTML = "";
+  numArr.map((el) => printToScreen(el));
 }
 
-const dialog = document.querySelector("dialog");
-dialog.showModal();
+refresh();
+
+selectionButton.addEventListener("click", selection);
+
+let copy = [...numArr];
+
+function selection() {
+  let sorted = [];
+  let acc = copy[0];
+
+  for (let i = 0; i < copy.length; i++) {
+    setTimeout(() => {
+      acc = copy[i];
+      for (let j = i + 1; j < copy.length; j++) {
+        const element = copy[j];
+        // console.log(j, element);
+
+        if (copy[j] > acc) {
+          acc = copy[j];
+        }
+      }
+      // console.log(acc);
+      // setTimeout(() => {
+      // console.log(i);
+      const index = copy.indexOf(acc);
+      copy.splice(index, 1);
+      copy.unshift(acc);
+      // }, 10);
+      // console.log(index);
+      // console.log(copy);
+      // delayPrint();
+
+      let duplicate = [...copy];
+      main.innerHTML = "";
+      duplicate.map((el) => printToScreen(el));
+    }, i * 300);
+  }
+
+  // for (let i = 0; i < copy.length; i++) {
+  //   for (let j = 1; j < copy.length; j++) {
+  //     if (copy[j] < acc) {
+  //       acc = copy[j];
+  //     }
+  //   }
+  //   sorted.push(acc);
+  //   const index = copy.indexOf(acc);
+  //   copy.splice(index, 1);
+  // }
+  // console.log(sorted);
+}
+
+function delayPrint() {
+  let duplicate = [...copy];
+  setTimeout(() => {
+    main.innerHTML = "";
+    duplicate.map((el) => printToScreen(el));
+  }, 5000);
+}
