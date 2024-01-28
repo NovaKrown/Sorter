@@ -1,9 +1,12 @@
 const main = document.querySelector("#main");
 const randomButton = document.querySelector("#random");
 const selectionButton = document.querySelector("#selection");
+const bubbleButton = document.querySelector("#bubble");
 randomButton.addEventListener("click", refresh);
 
 let numArr = [];
+let copy = [...numArr];
+let active = "false";
 
 let vw = innerWidth / 100;
 let vh = innerHeight / 100;
@@ -20,6 +23,7 @@ const randomizeArray = (array) => {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+
   return array;
 };
 
@@ -53,12 +57,19 @@ const printToScreen = (n) => {
   newElement.style.width = width;
   newElement.style.height = height;
   newElement.innerHTML = content;
+  newElement.setAttribute("num", `${n}`);
   main.appendChild(newElement);
 };
 
 function refresh() {
+  if (active == "true") {
+    console.log("no!");
+    return;
+  }
+
   generateNumbers(64);
   randomizeArray(numArr);
+  copy = [...numArr];
 
   main.innerHTML = "";
   numArr.map((el) => printToScreen(el));
@@ -68,57 +79,68 @@ refresh();
 
 selectionButton.addEventListener("click", selection);
 
-let copy = [...numArr];
-
 function selection() {
-  let sorted = [];
+  if (active == "true") {
+    console.log("no!");
+    return;
+  }
+
   let acc = copy[0];
 
   for (let i = 0; i < copy.length; i++) {
     setTimeout(() => {
       acc = copy[i];
       for (let j = i + 1; j < copy.length; j++) {
-        const element = copy[j];
-        // console.log(j, element);
+        active = "true";
 
         if (copy[j] > acc) {
           acc = copy[j];
         }
       }
-      // console.log(acc);
-      // setTimeout(() => {
-      // console.log(i);
       const index = copy.indexOf(acc);
       copy.splice(index, 1);
       copy.unshift(acc);
-      // }, 10);
-      // console.log(index);
-      // console.log(copy);
-      // delayPrint();
 
       let duplicate = [...copy];
       main.innerHTML = "";
       duplicate.map((el) => printToScreen(el));
-    }, i * 300);
+    }, i * 600);
   }
 
-  // for (let i = 0; i < copy.length; i++) {
-  //   for (let j = 1; j < copy.length; j++) {
-  //     if (copy[j] < acc) {
-  //       acc = copy[j];
-  //     }
-  //   }
-  //   sorted.push(acc);
-  //   const index = copy.indexOf(acc);
-  //   copy.splice(index, 1);
-  // }
-  // console.log(sorted);
+  active = "false";
 }
 
-function delayPrint() {
-  let duplicate = [...copy];
-  setTimeout(() => {
-    main.innerHTML = "";
-    duplicate.map((el) => printToScreen(el));
-  }, 5000);
+bubbleButton.addEventListener("click", bubble);
+
+function bubble() {
+  if (active == "true") {
+    console.log("no!");
+    return;
+  }
+
+  if (active == "false") {
+    console.log("bonk!");
+    console.log(active);
+    console.log(active);
+    for (let i = 0; i < copy.length - 1; i++) {
+      // let data = `[num='${copy[i]}']`;
+      // const num1 = document.querySelector(data);
+      // num1.classList.add("focus");
+
+      setTimeout(() => {
+        active = "true";
+        for (let j = 0; j < copy.length - 1; j++) {
+          if (copy[j] > copy[j + 1]) {
+            [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
+          }
+        }
+
+        let duplicate = [...copy];
+        main.innerHTML = "";
+        duplicate.map((el) => printToScreen(el));
+      }, i * 600);
+    }
+
+    active = "false";
+  }
 }

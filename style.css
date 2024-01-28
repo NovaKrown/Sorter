@@ -56,6 +56,15 @@
   box-shadow: 0 0 2px #100c0f, 0 0 3px #9963ff88, 0 0 5px #9963ff88, 0 0 10px #9963ff88;
 }
 
+.text-white {
+  color: #ddddff;
+  text-shadow: 0 0 2px #100c0f, 0 0 13px #ddddff88, 0 0 15px #ddddff88, 0 0 20px #ddddff88;
+}
+.border-white {
+  border: #ddddff 2px solid;
+  box-shadow: 0 0 2px #100c0f, 0 0 13px #ddddff88, 0 0 15px #ddddff88, 0 0 20px #ddddff88;
+}
+
 h1 {
   font-size: 2rem;
 }
@@ -165,7 +174,7 @@ footer {
 button {
   background-color: var(--color-accent);
   border-radius: 5px;
-  padding-inline: 1rem;
+  padding-inline: 5px;
   margin-top: 5px;
 }
 
@@ -177,3 +186,12 @@ button {
   appearance: textfield;
   text-align: center;
 } */
+
+.animate {
+  transition: all 1s;
+  transform: scale(0.5);
+}
+
+.focus {
+  background-color: #ddddff;
+}
