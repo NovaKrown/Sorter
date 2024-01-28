@@ -36,13 +36,13 @@ const printToScreen = (n) => {
   newElement.classList.add("box");
 
   if (n <= 16) {
-    newElement.classList.add("text-pink");
-    newElement.classList.add("border-pink");
+    newElement.classList.add("text-blue");
+    newElement.classList.add("border-blue");
   }
 
   if (n >= 17 && n <= 32) {
-    newElement.classList.add("text-blue");
-    newElement.classList.add("border-blue");
+    newElement.classList.add("text-pink");
+    newElement.classList.add("border-pink");
   }
 
   if (n >= 33 && n <= 48) {
@@ -111,7 +111,7 @@ function selection() {
       let duplicate = [...copy];
       main.innerHTML = "";
       duplicate.map((el) => printToScreen(el));
-    }, i * 100);
+    }, i * 200);
   }
 }
 
@@ -145,7 +145,7 @@ function bubble() {
       let duplicate = [...copy];
       main.innerHTML = "";
       duplicate.map((el) => printToScreen(el));
-    }, i * 100);
+    }, i * 200);
   }
   // }
 }
