@@ -7,6 +7,7 @@ randomButton.addEventListener("click", refresh);
 let numArr = [];
 let copy = [...numArr];
 let active = "false";
+let timeout = [];
 
 let vw = innerWidth / 100;
 let vh = innerHeight / 100;
@@ -62,8 +63,11 @@ const printToScreen = (n) => {
 };
 
 function refresh() {
-  if (active == "true") {
+  if (timeout.length) {
     console.log("no!");
+    timeout.forEach((el) => clearTimeout(el));
+    // active = "false";
+    timeout = [];
     return;
   }
 
@@ -80,19 +84,22 @@ refresh();
 selectionButton.addEventListener("click", selection);
 
 function selection() {
-  if (active == "true") {
+  if (timeout.length) {
     console.log("no!");
+    timeout.forEach((el) => clearTimeout(el));
+    // active = "false";
+    timeout = [];
     return;
   }
+  console.log("Selection Sort!");
 
+  // if (active == "false") {
+  // active = "true";
   let acc = copy[0];
-
   for (let i = 0; i < copy.length; i++) {
-    setTimeout(() => {
+    timeout[i] = setTimeout(() => {
       acc = copy[i];
       for (let j = i + 1; j < copy.length; j++) {
-        active = "true";
-
         if (copy[j] > acc) {
           acc = copy[j];
         }
@@ -104,43 +111,49 @@ function selection() {
       let duplicate = [...copy];
       main.innerHTML = "";
       duplicate.map((el) => printToScreen(el));
-    }, i * 600);
+    }, i * 100);
   }
-
-  active = "false";
 }
 
 bubbleButton.addEventListener("click", bubble);
 
 function bubble() {
-  if (active == "true") {
+  if (timeout.length) {
     console.log("no!");
+    timeout.forEach((el) => clearTimeout(el));
+    // active = "false";
+    timeout = [];
     return;
   }
 
-  if (active == "false") {
-    console.log("bonk!");
-    console.log(active);
-    console.log(active);
-    for (let i = 0; i < copy.length - 1; i++) {
-      // let data = `[num='${copy[i]}']`;
-      // const num1 = document.querySelector(data);
-      // num1.classList.add("focus");
+  // if (active == "false") {
+  // active = "true";
+  console.log("Bubble Sort!");
 
-      setTimeout(() => {
-        active = "true";
-        for (let j = 0; j < copy.length - 1; j++) {
-          if (copy[j] > copy[j + 1]) {
-            [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
-          }
+  for (let i = 0; i < copy.length - 1; i++) {
+    // let data = `[num='${copy[i]}']`;
+    // const num1 = document.querySelector(data);
+    // num1.classList.add("focus");
+
+    timeout[i] = setTimeout(() => {
+      for (let j = 0; j < copy.length - 1; j++) {
+        if (copy[j] > copy[j + 1]) {
+          [copy[j], copy[j + 1]] = [copy[j + 1], copy[j]];
         }
+      }
 
-        let duplicate = [...copy];
-        main.innerHTML = "";
-        duplicate.map((el) => printToScreen(el));
-      }, i * 600);
-    }
-
-    active = "false";
+      let duplicate = [...copy];
+      main.innerHTML = "";
+      duplicate.map((el) => printToScreen(el));
+    }, i * 100);
   }
+  // }
+}
+
+if (timeout.length) {
+  console.log(timeout);
+}
+
+if (!timeout.length) {
+  console.log("biscuit");
 }

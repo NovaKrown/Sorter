@@ -162,6 +162,8 @@ main {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
+  animation-name: animate;
+  animation-duration: 1.5s;
 }
 
 footer {
@@ -187,11 +189,13 @@ button {
   text-align: center;
 } */
 
-.animate {
-  transition: all 1s;
-  transform: scale(0.5);
-}
-
-.focus {
-  background-color: #ddddff;
+@keyframes animate {
+  from {
+    /* transform: scale(0.95); */
+    transform: skew(5deg);
+  }
+  to {
+    /* transform: scale(1); */
+    transform: skew(0deg);
+  }
 }
